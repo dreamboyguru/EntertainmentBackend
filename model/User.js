@@ -11,25 +11,44 @@ const UserModel = mongoose.model("users", UserSchema)
 
 const videosSchema = new mongoose.Schema({
     type: String,
-    tittle: String,
-    desc: String,
-    language: String,
-    year: Number,
-    grade: Number,
+    id : String,
+    original_title: String,
+    overview: String,
+    original_language: String,
+    release_date: String,
+    adult: String,
     actors: String,
-    genre: String,
-    date: String,
-    image: String,
+    genre_ids: Array,
+    poster_path: String,
+    backdrop_path: String,
     video: String,
     trailer: String
 })
 const videosModel = mongoose.model("videos", videosSchema)
 
+const tvSchema = new mongoose.Schema({
+    type: String,
+    id : String,
+    original_name: String,
+    overview: String,
+    original_language: String,
+    first_air_date: String,
+    adult: String,
+    actors: String,
+    genre_ids: Array,
+    poster_path: String,
+    backdrop_path: String,
+    video: String,
+    trailer: String
+})
+const tvModel = mongoose.model("tvs", tvSchema)
+
 const bookmarkSchema = new mongoose.Schema({
     email: String,
-    video_id: String
+    video_id: String,
+    type: String
 })
 const bookmarkModel = mongoose.model('bookmark', bookmarkSchema)
 
 
-module.exports = {UserModel, videosModel, bookmarkModel};
+module.exports = {UserModel, videosModel, tvModel, bookmarkModel};
