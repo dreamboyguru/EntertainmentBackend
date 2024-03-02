@@ -200,7 +200,6 @@ app.get('/videos/:userName', async (req, res) => {
           as: 'joinedData'
         }
       },
-      { $match: { joinedData: { $ne: [] } } }
       // Additional stages of the aggregation pipeline can be added here as needed
     ]);
 
@@ -235,7 +234,6 @@ app.get('/tv/:userName', async (req, res) => {
           as: 'joinedData'
         }
       },
-      { $match: { joinedData: { $ne: [] } } }
       // Additional stages of the aggregation pipeline can be added here as needed
     ]);
     // console.log(videos);
@@ -272,10 +270,12 @@ app.get('/bookmark/:userName', async(req, res) => {
                       }
                   }
               }
+              
           ],
           as: 'joinedData' // Name of the field to store the joined data
         }
       },
+      { $match: { joinedData: { $ne: [] } } }
       
       // Add more stages of the aggregation pipeline as needed
     ]);
@@ -297,6 +297,7 @@ app.get('/bookmark/:userName', async(req, res) => {
           as: 'joinedData' // Name of the field to store the joined data
         }
       },
+      { $match: { joinedData: { $ne: [] } } }
     ]);
     const combinedData = [...videos, ...tv]
     res.json(combinedData);
@@ -364,7 +365,7 @@ app.get('/recommend/:userName', async (req, res) => {
 
   try {
     const videos = await videosModel.aggregate([
-      { $sample: { size: 14 } },
+      { $sample: { size: 16 } },
       {
         $lookup: {
           from: bookmarkModel.collection.name,
