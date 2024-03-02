@@ -200,6 +200,7 @@ app.get('/videos/:userName', async (req, res) => {
           as: 'joinedData'
         }
       },
+      { $match: { joinedData: { $ne: [] } } }
       // Additional stages of the aggregation pipeline can be added here as needed
     ]);
 
@@ -234,6 +235,7 @@ app.get('/tv/:userName', async (req, res) => {
           as: 'joinedData'
         }
       },
+      { $match: { joinedData: { $ne: [] } } }
       // Additional stages of the aggregation pipeline can be added here as needed
     ]);
     // console.log(videos);
