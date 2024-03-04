@@ -91,6 +91,7 @@ npm install
 - **Development Mode**: `npm run dev` (uses `nodemon` for auto reloads)
 - **Production Mode**: `npm start`
 
+
 ## Detailed API Endpoints
 
 ### User Endpoints
@@ -168,6 +169,14 @@ npm install
 
   - **Response**: Array of trending movies and TV shows.
 
+
+## API Documentation And Summary
+
+  [API Documentation](https://documenter.getpostman.com/view/31401821/2sA2xb6axK)
+  
+  [Summary](https://docs.google.com/document/d/19SNoMbD3gXv3zEg5p8xuo0TLN1Ug9UY0/edit?usp=sharing&ouid=101631406661075244481&rtpof=true&sd=true)
+
+  
 ## Additional Notes
 
 - Ensure MongoDB is running and accessible through the `DATABASE_URL` specified in the `.env` file.
