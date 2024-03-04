@@ -83,7 +83,7 @@ npm install
 - **Production Mode**: `npm start`
 
 
-## Detailed API Endpoints
+## Short API Endpoints
 
 ### User Endpoints
 
