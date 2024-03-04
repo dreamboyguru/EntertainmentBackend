@@ -47,8 +47,6 @@ To set up the backend for the Entertainment Web Application, you'll need the fol
 
 ### Step 1: Clone the Repository
 
-1. **Clone the Repository**
-
    Start by cloning the repository to your local computer:
 
 ```sh
@@ -56,15 +54,8 @@ git clone https://github.com/dreamboyguru/EntertainmentBackend
 cd EntertainmentBackend
 ```
 
- 2.**Launch the Application**
 
-   Run the following command to start the application in development mode:
-
-   ```bash
-   npm start
-   ```
-
-# Environment Configuration
+### Step 2: Environment Configuration
 
 Ensure that you set up the following environment variables for the backend of the Entertainment Web Application:
 
@@ -176,7 +167,7 @@ npm install
   
   [Summary](https://docs.google.com/document/d/19SNoMbD3gXv3zEg5p8xuo0TLN1Ug9UY0/edit?usp=sharing&ouid=101631406661075244481&rtpof=true&sd=true)
 
-  
+
 ## Additional Notes
 
 - Ensure MongoDB is running and accessible through the `DATABASE_URL` specified in the `.env` file.
