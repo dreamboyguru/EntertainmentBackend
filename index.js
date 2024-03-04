@@ -275,7 +275,7 @@ app.get('/bookmark/:userName', async(req, res) => {
           as: 'joinedData' // Name of the field to store the joined data
         }
       },
-      { $match: { joinedData: { $ne: [] } } }
+      // { $match: { joinedData: { $ne: [] } } }
       
       // Add more stages of the aggregation pipeline as needed
     ]);
