@@ -365,7 +365,7 @@ app.get('/recommend/:userName', async (req, res) => {
 
   try {
     const videos = await videosModel.aggregate([
-      { $sample: { size: 16 } },
+      { $sample: { size: 14 } },
       {
         $lookup: {
           from: bookmarkModel.collection.name,
