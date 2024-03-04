@@ -27,12 +27,12 @@ Welcome to the Entertainment Web Application repository! This application provid
 - **Personalized Bookmark**: Curate your own bookmark, adding or removing media according to your preference, for a tailored browsing experience.
 - **Intuitive User Interface**: Navigate through the application with an intuitive and elegant interface, designed for an optimal user experience.
 
+## API Documentation And Summary
 
-## Best Practices And Summary
-  
-  [Best Practices](https://docs.google.com/document/d/1XJMezP6SHh-B1lg2Ch9tgGWfjYHjI9E0AsDNM1McVRY/edit?usp=sharing)
+  [API Documentation](https://documenter.getpostman.com/view/31401821/2sA2xb6axK)
   
   [Summary](https://docs.google.com/document/d/19SNoMbD3gXv3zEg5p8xuo0TLN1Ug9UY0/edit?usp=sharing&ouid=101631406661075244481&rtpof=true&sd=true)
+
 
 ## Getting Started
 
