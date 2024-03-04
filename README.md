@@ -1,179 +1,82 @@
-# Entertainment-Backend Web Application
+# Entertainment Frontend Web Application
 
-## Introduction
-
-Entertainment-Backend is a comprehensive backend service designed to support a front-end application for browsing, managing, and tracking movies and TV shows. It includes functionalities for user authentication, managing watchlists, and accessing detailed information about various entertainment media.
+Welcome to the Entertainment Web Application repository! This application provides a user-friendly platform for accessing a variety of entertainment content, including movies, TV shows, and more.
 
 ## Tech Stack Used:
 
+- **Frontend Framework**: React
+- **State Management**: Redux Toolkit
+- **UI Components**: React Icons
+- **HTTP Requests**: Axios
+- **Form Handling and Validation**: Formik and Yup
 - **Backend Framework**: Node.js with Express.js
 - **Middleware**: Cors
-- **HTTP Requests**: Axios
 - **Server Monitoring**: Nodemon
 - **Authentication**: JWT Token
 - **Database**: MongoDB with Mongoose
 - **API Documentation**: Postman
 - **IDE**: Visual Studio Code
+- **Frontend Hosting**: Vercel
 - **Backend Hosting**: Render
 
-## Features
+## Features:
 
-- **User Authentication**: Secure registration and login processes with JWT for maintaining sessions.
-- **Media Catalog**: Access to a wide range of movies and TV shows, including search functionality and detailed media information.
-- **Personal Bookmark**: Users can create and manage a personal bookmark for tracking their favorite movies and TV shows.
-- **Trending Content**: Endpoint to fetch trending content based on popularity or other criteria.
-
-## Prerequisites
-
-To set up the backend for the Entertainment Web Application, you'll need the following prerequisites:
-
-- **Node.js**: JavaScript runtime environment for server-side code execution.
-- **npm**: Node Package Manager, for managing dependencies.
-- **Express.js**: Web application framework for building APIs and handling HTTP requests.
-- **npm**: Node Package Manager for managing project dependencies.
-- **MongoDB**: NoSQL database for storing application data.
-- **Mongoose**: MongoDB object modeling tool for Node.js, providing a schema-based solution for modeling application data.
-- **Axios**: HTTP client for making requests to external APIs or services.
-- **Cors**: Middleware for enabling Cross-Origin Resource Sharing, allowing frontend and backend servers to communicate securely.
-- **Nodemon**: Utility for automatically restarting the server during development upon file changes, enhancing the development workflow.
-- **JWT (JSON Web Tokens)**: For user authentication and maintaining sessions securely.
-- **API Documentation Tool**: Such as Postman, for documenting and testing API endpoints effectively.
-- **IDE (Integrated Development Environment)**: Such as Visual Studio Code, for writing and debugging backend code efficiently.
-- **GitHub**: Version control system for collaborating on codebase and hosting repositories.
-- **Backend Hosting Provider**: Such as Render, for deploying and hosting the backend application.
+- **Dynamic Media Catalog**: Access an extensive library of movies and TV shows, dynamically loaded and presented with high-quality visuals and essential information.
+- **Responsive Layout**: Enjoy a seamless experience across various devices, thanks to the responsive design principles implemented with Tailwind CSS.
+- **State Management**: Experience consistent and reliable interactions with the application's features, state management capabilities of Redux Toolkit.
+- **Personalized Bookmark**: Curate your own bookmark, adding or removing media according to your preference, for a tailored browsing experience.
+- **Intuitive User Interface**: Navigate through the application with an intuitive and elegant interface, designed for an optimal user experience.
 
 
-## Setup Instructions
-
-### Step 1: Clone the Repository
-
-   Start by cloning the repository to your local computer:
-
-```sh
-git clone https://github.com/dreamboyguru/EntertainmentBackend
-cd EntertainmentBackend
-```
-
-
-### Step 2: Environment Configuration
-
-Ensure that you set up the following environment variables for the backend of the Entertainment Web Application:
-
-- **PORT**: Set to `3001` to specify the port number on which the server will listen.
-- **DB_URL**: MongoDB connection string for connecting to the database. Use one of the following options:
-  - For local development: `'mongodb://127.0.0.1:27017/entertainment'`
-  - For MongoDB Atlas (cloud-hosted): Uncomment the line below and replace it with your MongoDB Atlas connection string.
-    ```
-    # DB_URL = 'mongodb+srv://<username>:<password>@<cluster>/<database>'
-    ```
-- **SECRET**: Secret key for JWT token generation and verification. Choose a strong and secure secret key.
-- **API_KEY**: API key for accessing external APIs or services
-
-Ensure that these environment variables are correctly configured before running the backend server.
-
-### Step 3: Install Dependencies
-
-```sh
-npm install
-```
-
-### Step 4: Running the Server
-
-- **Development Mode**: `npm run dev` (uses `nodemon` for auto reloads)
-- **Production Mode**: `npm start`
-
-
-## Short API Endpoints
-
-### User Endpoints
-
-- `POST /signUp`: Register a new user.
-
-  - **Body**: `{ "Email": "user@example.com", "Password": "password123" }`
-  - **Response**: User object with JWT token.
-
-- `POST /login`: Authenticate and log in a user.
-
-  - **Body**: `{ "userName": "user@example.com", "password": "password123" }`
-  - **Response**: User object with JWT token.
-
-- `GET /check-token-validity`: Retrieve details of the currently logged-in user.
-  - **Headers**: `Authorization: Bearer <token>`
-  - **Response**: User object without sensitive information like password.
-
-### Movie Endpoints
-
-- `GET /videos/:useName`: Fetch a list of movies
-
-  - **Path Parameters**: `id` (useName) [optional]
-  - **Response**: Array of movie objects.
-
-- `GET /api/videos/:video_id`: video key for movies play.
-
-  - **Path Parameters**: `id` (Movie ID)
-  - **Response**: Array of movies.
-
-- `GET /api/video/genre/:video_id`: Get detailed information about a specific movie.
-  - **Path Parameters**: `id` (Movie ID)
-  - **Response**: Movie object with detailed information.
-
-### TV Show Endpoints
-
-- `GET /tv/:userName`: Fetch a list of TV shows.
-
-  - **Path Parameters**: `id` (userName) [Optional]
-  - **Response**: Array of TV show objects.
-
-- `GET /api/tv/:video_id`: video key for tv show video play.
-
-  - **Path Parameters**: `id` (tv show ID)
-  - **Response**: Array of movies.
-
-- `GET /api/tv/genre/:video_id`: Get detailed information about a specific tv show.
-  - **Path Parameters**: `id` (tv show ID)
-  - **Response**: Movie object with detailed information.
-
-### Bookmark Endpoints
-
-- `POST /bookmark`: Retrieve the current user's Bookmark.
-
-  - **body parameter**: `email: userName, video_id: 1234`
-  - **Response**: Success message or error.
-
-- `GET /bookmark/:userName`: Add a movie or TV show to the bookmark.
-
-  - **Response**: Array of items in the user's bookmark.
-
-- `DELETE /bookmark/:id`: Remove an item from the watchlist.
-
-  - **Response**: Success message or error.
-
-### Trending Endpoint
-
-- `GET /trending/userName`: Fetch trending movies and TV shows.
-
-  - **Response**: Array of trending movies and TV shows.
-
-### recommend Endpoint
-
-- `GET /recommend/userName`: Fetch trending movies and TV shows.
-
-  - **Response**: Array of trending movies and TV shows.
-
-
-## API Documentation And Summary
-
-  [API Documentation](https://documenter.getpostman.com/view/31401821/2sA2xb6axK)
+## Best Practices And Summary
+  
+  [Best Practices](https://docs.google.com/document/d/1XJMezP6SHh-B1lg2Ch9tgGWfjYHjI9E0AsDNM1McVRY/edit?usp=sharing)
   
   [Summary](https://docs.google.com/document/d/19SNoMbD3gXv3zEg5p8xuo0TLN1Ug9UY0/edit?usp=sharing&ouid=101631406661075244481&rtpof=true&sd=true)
 
+## Getting Started
 
-## Additional Notes
+Follow these instructions to set up your local development environment and start exploring the Entertainment Frontend.
 
-- Ensure MongoDB is running and accessible through the `DATABASE_URL` specified in the `.env` file.
+### Prerequisites
 
-- All endpoints requiring authentication expect a JWT token to be provided in the `Authorization` header as a Bearer token.
+Before you begin, make sure you have the following tools installed:
 
+- [Node.js](https://nodejs.org/en/download/)
+- [npm](https://www.npmjs.com/get-npm)
+
+### Installation
+
+1. **Clone the Repository**
+
+   Start by cloning the repository to your local computer:
+
+   ```bash
+   git clone https://github.com/dreamboyguru/Entertainment
+   cd Entertainment
+   ```
+
+2. **Install Dependencies**
+
+   Within the project directory, install the necessary NPM packages:
+
+   ```bash
+   npm install
+   ```
+
+3. **Launch the Application**
+
+   Run the following command to start the application in development mode:
+
+   ```bash
+   npm start
+   ```
+
+   The application should now be accessible at [http://localhost:3000](http://localhost:3000).
+
+## Usage
+
+Explore the application to discover the latest trends in movies and TV shows, and manage your personal Bookmark. Each media card offers content, while detailed views provide in-depth information.
 
 
 ## Contact
