@@ -314,7 +314,7 @@ app.delete('/bookmark/:value', async (req, res) => {
     await bookmarkModel.findOneAndDelete({ 'video_id': value });
     
     // Send a success response back to the client
-    res.status(200).json({ message: 'Bookmark deleted successfully' });
+    res.status(200).json({ 'video_id': value, 'message': 'Bookmark deleted successfully' });
   } catch (error) {
     console.error('Error deleting bookmark:', error);
     res.status(500).json({ message: 'Internal server error' });
