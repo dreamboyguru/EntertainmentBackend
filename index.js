@@ -256,6 +256,7 @@ app.post('/bookmark', (req, res) => {
 
 app.get('/bookmark/:userName', async(req, res) => {
   const {userName} = req.params;
+  // res.json(userName)
   try {
     const videos = await videosModel.aggregate([
       {
@@ -266,7 +267,10 @@ app.get('/bookmark/:userName', async(req, res) => {
               {
                   $match: {
                       $expr: {
-                          $eq: ["$$videoId", "$video_id"] // Compare converted _id with video_id
+                        $and: [
+                          { $eq: ["$$videoId", "$video_id"] }, // Compare converted _id with video_id
+                          { $eq : [userName, "$email"] }
+                        ]
                       }
                   }
               }
@@ -287,11 +291,14 @@ app.get('/bookmark/:userName', async(req, res) => {
           let: { videoId: { $toString: "$_id" } }, // Convert _id to string
           pipeline: [
               {
-                  $match: {
-                      $expr: {
-                          $eq: ["$$videoId", "$video_id"] // Compare converted _id with video_id
-                      }
+                $match: {
+                  $expr: {
+                    $and: [
+                      { $eq: ["$$videoId", "$video_id"] }, // Compare converted _id with video_id
+                      { $eq : [userName, "$email"] }
+                    ]
                   }
+                }
               }
           ],
           as: 'joinedData' // Name of the field to store the joined data
@@ -365,7 +372,7 @@ app.get('/recommend/:userName', async (req, res) => {
 
   try {
     const videos = await videosModel.aggregate([
-      { $sample: { size: 14 } },
+      { $sample: { size: 16 } },
       {
         $lookup: {
           from: bookmarkModel.collection.name,
@@ -398,5 +405,5 @@ app.get('/recommend/:userName', async (req, res) => {
 
 
 app.listen(port, () => {
-    console.log("server is running on 3001");
+    console.log("server is running on "+port);
 });
