@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { UserModel, videosModel, bookmarkModel, tvModel } = require('./model/User'); // Corrected the VideosModel import
+const { UserModel, videosModel, bookmarkModel, tvModel, ReviewsModel } = require('./model/User'); // Corrected the VideosModel import
 const multer = require('multer');
 const path = require('path')
 const jwt = require('jsonwebtoken');
@@ -370,6 +370,41 @@ app.delete('/bookmark/:value', async (req, res) => {
 
 
 
+app.get('/all/movies/:userName', async (req, res) => {
+  const { userName } = req.params;
+
+  try {
+    const videos = await videosModel.aggregate([
+      // { $sample: { size: 10 } },
+      {
+        $lookup: {
+          from: bookmarkModel.collection.name,
+          let: { videoId: { $toString: '$_id' } },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [
+                    { $eq: ['$$videoId', '$video_id'] },
+                    { $eq: [userName, '$email'] } // Assuming 'email' is the field in bookmarkModel that stores user's email
+                  ]
+                }
+              }
+            }
+          ],
+          as: 'joinedData'
+        }
+      },
+      // Additional stages of the aggregation pipeline can be added here as needed
+    ]);
+
+    res.json(videos);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 
 app.get('/trending/:userName', async (req, res) => {
@@ -442,6 +477,24 @@ app.get('/recommend/:userName', async (req, res) => {
   }
 });
 
+
+app.post('/api/reviews', (req, res) => {
+  // const {userName, videoName} = req.body
+  ReviewsModel.create(req.body)
+      .then(result => res.json(result))
+      .catch(err => console.log(err))
+  // console.log(req.body);
+})
+
+
+app.get('/api/reviews', async (req, res) => {
+  try {
+      const reviews = await ReviewsModel.find();
+      res.status(200).json(reviews);
+  } catch (error) {
+      res.status(500).json({ error: 'Error fetching reviews' });
+  }
+});
 
 
 app.listen(port, () => {
