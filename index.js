@@ -490,10 +490,10 @@ app.post('/api/reviews', async (req, res) => {
     try {
         // Create new review
         const newReview = new Review({
-            comment,
-            rating: parseInt(rating),
             userName,
-            videoName
+            videoName,
+            Rating: parseInt(rating),
+            Reviews
         });
 
         // Save review to MongoDB
