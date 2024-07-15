@@ -40,11 +40,11 @@ app.post('/videos/insert', async (req, res) => {
       }));
 
       // Fetch data from TMDB API for kannada movie
-      const kannadaResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=kan&sort_by=popularity.desc`);
-      const tmdbKannada = kannadaResponse.data.results.map(kannada => ({
+      const kannadaResponse = await axios.get('https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=kn&sort_by=popularity.desc');
+        const tmdbKannada = kannadaResponse.data.results.map(kannada => ({
           ...kannada,
-          type: 'movie' // Add a 'type' field to identify it as a TV series
-      }));
+          type: 'movie' // Add a 'type' field to identify it as a movie
+        }));
 
       // Insert movie data into MongoDB
       await videosModel.insertMany(tmdbMovies);
