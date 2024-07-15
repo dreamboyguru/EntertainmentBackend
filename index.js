@@ -479,7 +479,7 @@ app.get('/recommend/:userName', async (req, res) => {
 
 
 // Endpoint to handle form submission
-app.post('/api/reviews', upload.none(), async (req, res) => {
+app.post('/api/reviews', async (req, res) => {
     const { comment, rating, userName, videoName } = req.body;
 
     // Validate inputs
