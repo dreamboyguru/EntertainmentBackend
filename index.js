@@ -26,31 +26,31 @@ mongoose.connect(dbUrl);
 app.post('/videos/insert', async (req, res) => {
   try {
       // Fetch data from TMDB API for movies
-      const movieResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=1`);
-      const tmdbMovies = movieResponse.data.results.map(movie => ({
-          ...movie,
-          type: 'movie' // Add a 'type' field to identify it as a movie
-      }));
+      // const movieResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=1`);
+      // const tmdbMovies = movieResponse.data.results.map(movie => ({
+      //     ...movie,
+      //     type: 'movie' // Add a 'type' field to identify it as a movie
+      // }));
 
-      // Fetch data from TMDB API for TV series
-      const tvResponse = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&page=1`);
-      const tmdbTVSeries = tvResponse.data.results.map(tvSeries => ({
-          ...tvSeries,
-          type: 'tv' // Add a 'type' field to identify it as a TV series
-      }));
+      // // Fetch data from TMDB API for TV series
+      // const tvResponse = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&page=1`);
+      // const tmdbTVSeries = tvResponse.data.results.map(tvSeries => ({
+      //     ...tvSeries,
+      //     type: 'tv' // Add a 'type' field to identify it as a TV series
+      // }));
 
       // Fetch data from TMDB API for kannada movie
-      const kannadaResponse = await axios.get('https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=kn&sort_by=popularity.desc');
+      const kannadaResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=kn&sort_by=popularity.desc`);
         const tmdbKannada = kannadaResponse.data.results.map(kannada => ({
           ...kannada,
           type: 'movie' // Add a 'type' field to identify it as a movie
         }));
 
       // Insert movie data into MongoDB
-      await videosModel.insertMany(tmdbMovies);
+      // await videosModel.insertMany(tmdbMovies);
 
       // Insert TV series data into MongoDB
-      await tvModel.insertMany(tmdbTVSeries);
+      // await tvModel.insertMany(tmdbTVSeries);
       
       // Insert TV series data into MongoDB
       await videosModel.insertMany(tmdbKannada);
