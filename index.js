@@ -19,7 +19,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-mongoose.connect(dbUrl);
+// Connect to MongoDB
+mongoose.connect(`${dbUrl}`, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('Could not connect to MongoDB:', err));
 
 
 
@@ -478,13 +481,13 @@ app.get('/recommend/:userName', async (req, res) => {
 });
 
 
-// Endpoint to handle form submission
-app.post('/api/reviews', async (req, res) => {
-  res.send('hi');
-     ReviewsModel.create(req.body)
+app.post('/api/reviews', (req, res) => {
+  // const {userName, videoName} = req.body
+  ReviewsModel.create(req.body)
       .then(result => res.json(result))
       .catch(err => console.log(err))
-});
+  // console.log(req.body);
+})
 
 
 app.get('/api/reviews', async (req, res) => {
@@ -498,5 +501,5 @@ app.get('/api/reviews', async (req, res) => {
 
 
 app.listen(port, () => {
-    console.log("server is running on "+port);
+    console.log("server is running on ", port);
 });
