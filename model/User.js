@@ -56,6 +56,6 @@ const ReviewsSchema = new mongoose.Schema({
     Rating: String,
     Reviews: String
 })
-const ReviewsModel = mongoose.model("users", ReviewsSchema)
+const ReviewsModel = mongoose.model("reviews", ReviewsSchema)
 
 module.exports = {UserModel, videosModel, tvModel, bookmarkModel, ReviewsModel};
