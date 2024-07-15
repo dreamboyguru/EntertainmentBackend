@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { UserModel, videosModel, bookmarkModel, tvModel, ReviewsModel } = require('./model/User'); // Corrected the VideosModel import
+const { UserModel, videosModel, bookmarkModel, tvModel, reviewsModel } = require('./model/User'); // Corrected the VideosModel import
 const multer = require('multer');
 const path = require('path')
 const jwt = require('jsonwebtoken');
@@ -483,7 +483,7 @@ app.get('/recommend/:userName', async (req, res) => {
 
 app.post('/api/reviews', (req, res) => {
   // const {userName, videoName} = req.body
-  ReviewsModel.create(req.body)
+  reviewsModel.create(req.body)
       .then(result => res.json(result))
       .catch(err => console.log(err))
   // console.log(req.body);
@@ -492,7 +492,7 @@ app.post('/api/reviews', (req, res) => {
 
 app.get('/api/reviews', async (req, res) => {
   try {
-      const reviews = await ReviewsModel.find();
+      const reviews = await reviewsModel.find();
       res.status(200).json(reviews);
   } catch (error) {
       res.status(500).json({ error: 'Error fetching reviews' });
