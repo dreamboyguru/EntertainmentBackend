@@ -489,15 +489,17 @@ app.post('/api/reviews', async (req, res) => {
 
     try {
         // Create new review
-        const newReview = new Review({
-            userName,
-            videoName,
-            Rating: parseInt(rating),
-            Reviews
-        });
+        // const newReview = new Review({
+        //     userName,
+        //     videoName,
+        //     Rating: parseInt(rating),
+        //     Reviews
+        // });
 
         // Save review to MongoDB
-        await newReview.save();
+        // await newReview.save();
+
+        const newReview = ReviewsModel.create(req.body)
 
         res.status(201).json({ message: 'Review submitted successfully', review: newReview });
     } catch (error) {
