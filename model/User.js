@@ -50,5 +50,12 @@ const bookmarkSchema = new mongoose.Schema({
 })
 const bookmarkModel = mongoose.model('bookmark', bookmarkSchema)
 
+const ReviewsSchema = new mongoose.Schema({
+    userName: String,
+    videoName: String,
+    Rating: String,
+    Reviews: String
+})
+const ReviewsModel = mongoose.model("users", ReviewsSchema)
 
-module.exports = {UserModel, videosModel, tvModel, bookmarkModel};
+module.exports = {UserModel, videosModel, tvModel, bookmarkModel, ReviewsModel};
