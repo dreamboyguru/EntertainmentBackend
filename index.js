@@ -39,11 +39,21 @@ app.post('/videos/insert', async (req, res) => {
           type: 'tv' // Add a 'type' field to identify it as a TV series
       }));
 
+      // Fetch data from TMDB API for kannada movie
+      const kannadaResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=kan&sort_by=popularity.desc`);
+      const tmdbKannada = kannadaResponse.data.results.map(kannada => ({
+          ...kannada,
+          type: 'movie' // Add a 'type' field to identify it as a TV series
+      }));
+
       // Insert movie data into MongoDB
       await videosModel.insertMany(tmdbMovies);
 
       // Insert TV series data into MongoDB
       await tvModel.insertMany(tmdbTVSeries);
+      
+      // Insert TV series data into MongoDB
+      await videosModel.insertMany(tmdbKannada);
 
       res.json({ message: 'TMDB movie and TV series data inserted into MongoDB' });
   } catch (error) {
