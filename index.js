@@ -480,33 +480,10 @@ app.get('/recommend/:userName', async (req, res) => {
 
 // Endpoint to handle form submission
 app.post('/api/reviews', async (req, res) => {
-    console.log(req.body);
-    return res.send(req.body);
-    const { comment, rating, userName, videoName } = req.body;
-
-    // Validate inputs
-    if (!comment || !rating || !userName || !videoName) {
-        return res.status(400).json({ error: 'All fields are required.' });
-    }
-
-    try {
-        // Create new review
-        // const newReview = new Review({
-        //     userName,
-        //     videoName,
-        //     Rating: parseInt(rating),
-        //     Reviews
-        // });
-
-        // Save review to MongoDB
-        // await newReview.save();
-
-        const newReview = ReviewsModel.create(req.body)
-
-        res.status(201).json({ message: 'Review submitted successfully', review: newReview });
-    } catch (error) {
-        res.status(500).json({ error: 'Error submitting review' });
-    }
+  res.send('hi');
+     ReviewsModel.create(req.body)
+      .then(result => res.json(result))
+      .catch(err => console.log(err))
 });
 
 
