@@ -482,7 +482,7 @@ app.get('/recommend/:userName', async (req, res) => {
 
 
 app.post('/api/reviews', (req, res) => {
-    res.send(req.body)
+    // res.send(req.body)
   // const {userName, videoName} = req.body
   reviewsModel.create(req.body)
       .then(result => res.json(result))
