@@ -28,7 +28,7 @@ mongoose.connect(`${dbUrl}`, { useNewUrlParser: true, useUnifiedTopology: true }
 
 app.post('/videos/insert', async (req, res) => {
   const {length} = req.body;
-  console.log(length);
+  console.log(req.body); return
   try {
       // Fetch data from TMDB API for movies
       const movieResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${length}`);
