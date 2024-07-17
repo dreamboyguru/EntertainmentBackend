@@ -28,6 +28,7 @@ mongoose.connect(`${dbUrl}`, { useNewUrlParser: true, useUnifiedTopology: true }
 
 app.post('/videos/insert', async (req, res) => {
   const {length} = req.body;
+  console.log(length);
   try {
       // Fetch data from TMDB API for movies
       const movieResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${length}`);
@@ -44,28 +45,28 @@ app.post('/videos/insert', async (req, res) => {
       }));
 
       // Fetch data from TMDB API for kannada movie
-      const kannadaResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=kn&sort_by=popularity.desc&page=${length}`);
+      const kannadaResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=kn&sort_by=popularity.desc`);
         const tmdbKannada = kannadaResponse.data.results.map(kannada => ({
           ...kannada,
           type: 'movie' // Add a 'type' field to identify it as a movie
         }));
 
       // Fetch data from TMDB API for hindi movie
-      const hindiResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=hi&sort_by=popularity.desc&page=${length}`);
+      const hindiResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=hi&sort_by=popularity.desc`);
         const tmdbHindi = hindiResponse.data.results.map(kannada => ({
           ...kannada,
           type: 'movie' // Add a 'type' field to identify it as a movie
         }));
 
       // Fetch data from TMDB API for telagu movie
-      const telaguResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=te&sort_by=popularity.desc&page=${length}`);
+      const telaguResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=te&sort_by=popularity.desc`);
         const tmdbTelagu = telaguResponse.data.results.map(kannada => ({
           ...kannada,
           type: 'movie' // Add a 'type' field to identify it as a movie
         }));
 
       // Fetch data from TMDB API for malayalam movie
-      const malayalamResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=ml&sort_by=popularity.desc&page=${length}`);
+      const malayalamResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=ml&sort_by=popularity.desc`);
         const tmdbMalayalam = malayalamResponse.data.results.map(kannada => ({
           ...kannada,
           type: 'movie' // Add a 'type' field to identify it as a movie
@@ -77,17 +78,19 @@ app.post('/videos/insert', async (req, res) => {
       // Insert TV series data into MongoDB
       await tvModel.insertMany(tmdbTVSeries);
       
-      // Insert kannada data into MongoDB
-      await videosModel.insertMany(tmdbKannada);
+      if (length === 1) {
+        // Insert kannada data into MongoDB
+        await videosModel.insertMany(tmdbKannada);
 
-      // Insert Hindi movie data into MongoDB
-      await videosModel.insertMany(tmdbHindi);
+        // Insert Hindi movie data into MongoDB
+        await videosModel.insertMany(tmdbHindi);
 
-      // Insert Telagau movie data into MongoDB
-      await videosModel.insertMany(tmdbTelagu);
+        // Insert Telagau movie data into MongoDB
+        await videosModel.insertMany(tmdbTelagu);
 
-      // Insert Malaya;am movie data into MongoDB
-      await videosModel.insertMany(tmdbMalayalam);
+        // Insert Malaya;am movie data into MongoDB
+        await videosModel.insertMany(tmdbMalayalam);
+      }
 
       res.json({ message: 'TMDB movie and TV series data inserted into MongoDB' });
   } catch (error) {
