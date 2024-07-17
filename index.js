@@ -27,44 +27,45 @@ mongoose.connect(`${dbUrl}`, { useNewUrlParser: true, useUnifiedTopology: true }
 
 
 app.post('/videos/insert', async (req, res) => {
+  const {length} = req.body;
   try {
       // Fetch data from TMDB API for movies
-      const movieResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=1`);
+      const movieResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&page=${length}`);
       const tmdbMovies = movieResponse.data.results.map(movie => ({
           ...movie,
           type: 'movie' // Add a 'type' field to identify it as a movie
       }));
 
       // Fetch data from TMDB API for TV series
-      const tvResponse = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&page=1`);
+      const tvResponse = await axios.get(`https://api.themoviedb.org/3/discover/tv?api_key=${API_KEY}&page=${length}`);
       const tmdbTVSeries = tvResponse.data.results.map(tvSeries => ({
           ...tvSeries,
           type: 'tv' // Add a 'type' field to identify it as a TV series
       }));
 
       // Fetch data from TMDB API for kannada movie
-      const kannadaResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=kn&sort_by=popularity.desc`);
+      const kannadaResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=kn&sort_by=popularity.desc&page=${length}`);
         const tmdbKannada = kannadaResponse.data.results.map(kannada => ({
           ...kannada,
           type: 'movie' // Add a 'type' field to identify it as a movie
         }));
 
       // Fetch data from TMDB API for hindi movie
-      const hindiResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=hi&sort_by=popularity.desc`);
+      const hindiResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=hi&sort_by=popularity.desc&page=${length}`);
         const tmdbHindi = hindiResponse.data.results.map(kannada => ({
           ...kannada,
           type: 'movie' // Add a 'type' field to identify it as a movie
         }));
 
       // Fetch data from TMDB API for telagu movie
-      const telaguResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=te&sort_by=popularity.desc`);
+      const telaguResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=te&sort_by=popularity.desc&page=${length}`);
         const tmdbTelagu = telaguResponse.data.results.map(kannada => ({
           ...kannada,
           type: 'movie' // Add a 'type' field to identify it as a movie
         }));
 
       // Fetch data from TMDB API for malayalam movie
-      const malayalamResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=ml&sort_by=popularity.desc`);
+      const malayalamResponse = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&with_original_language=ml&sort_by=popularity.desc&page=${length}`);
         const tmdbMalayalam = malayalamResponse.data.results.map(kannada => ({
           ...kannada,
           type: 'movie' // Add a 'type' field to identify it as a movie
@@ -482,7 +483,6 @@ app.get('/recommend/:userName', async (req, res) => {
 
 
 app.post('/api/reviews', (req, res) => {
-    // res.send(req.body)
   // const {userName, videoName} = req.body
   reviewsModel.create(req.body)
       .then(result => res.json(result))
