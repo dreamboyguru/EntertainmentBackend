@@ -99,6 +99,21 @@ app.post('/videos/insert', async (req, res) => {
   }
 });
 
+app.delete('/api/admin/video/delete/:id', (req, res) => {
+  const {id} = req.params;
+  videosModel.findByIdAndDelete(id)
+    .then((result) => {
+      if (result) {
+        res.status(200).json({ message: 'Video deleted successfully', data: result });
+      } else {
+        res.status(404).json({ message: 'Video not found' });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Error deleting video', error: err });
+    });
+})
+
 app.get('/api/videos/:id', async (req, res) => {
   try {
     const tmdbId = req.params.id;
